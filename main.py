@@ -28,6 +28,19 @@ class File_action:
         file = open('a.txt', 'w')
         file.write(filedata)
 
+    def delate_file(self, namber_line):
+        file = open('a.txt', 'r')
+        lines = file.readlines()
+        file.close()
+        file = open('a.txt', 'r')
+        filedata = file.read()
+        file.close()
+        number = namber_line - 1
+        text_1 = lines[number]
+        filedata = filedata.replace(text_1, "")
+        file = open('a.txt', 'w')
+        file.write(filedata)
+
 
 def action_on_file():
     while True:
@@ -43,6 +56,11 @@ def action_on_file():
             text_change = input("Введите текст\n")
             file.change_fiel(int(number_line), text_change)
             print("Изменнно!")
+
+        elif int(action) == 3:
+            number_line = input("Введите какую строку хотитие удалить.\n")
+            file.delate_file(int(number_line))
+            print("Удаленно!")
 
         else:
             print("Я вас не понимаю")
