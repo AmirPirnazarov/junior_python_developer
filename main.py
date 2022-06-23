@@ -41,6 +41,32 @@ class File_action:
         file = open('a.txt', 'w')
         file.write(filedata)
 
+    def change_fiel(self, number_line, change_text):
+        file = open('a.txt', 'r')
+        lines = file.readlines()
+        file.close()
+        file = open('a.txt', 'r')
+        filedata = file.read()
+        file.close()
+        number_line = number_line - 1
+        text_1 = lines[number_line]
+        filedata = filedata.replace(text_1, f"{change_text}\n")
+        file = open('a.txt', 'w')
+        file.write(filedata)
+
+    def total_amount(self):
+        file = open('a.txt', 'r')
+        lines = file.readlines()
+        file.close()
+        s = []
+        for i in lines:
+            for t in i.split():
+                try:
+                    s.append(int(t))
+                except ValueError:
+                    pass
+        print("общую сумму равна:", sum(s), "\n")
+
 
 def action_on_file():
     while True:
@@ -61,6 +87,9 @@ def action_on_file():
             number_line = input("Введите какую строку хотитие удалить.\n")
             file.delate_file(int(number_line))
             print("Удаленно!")
+
+        elif int(action) == 4:
+            file.total_amount()
 
         else:
             print("Я вас не понимаю")
